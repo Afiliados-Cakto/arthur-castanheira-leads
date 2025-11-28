@@ -179,3 +179,8 @@
 .animate-scale-in {
   animation: scale-in 0.5s ease-out;
 }
+
+/* Hide V0 badge globally */
+#V0-badge {
+  display: none !important;
+}
