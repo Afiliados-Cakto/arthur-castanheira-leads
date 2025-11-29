@@ -102,6 +102,17 @@ export default function QuizFunnel() {
     }
   }, [step, isLoading])
 
+  useEffect(() => {
+    if (step === 14 && showWinMessage) {
+      // Changed from step === 3 to step === 14 for wheel spin
+      const timer = setTimeout(() => {
+        setShowWinMessage(false)
+        setStep(15) // Go to bonus reveal page
+      }, 3500)
+      return () => clearTimeout(timer)
+    }
+  }, [step, showWinMessage])
+
   const handleNext = () => {
     if (step === 14) {
       // Página de carregamento
@@ -1484,7 +1495,7 @@ export default function QuizFunnel() {
                   disabled={isSpinning}
                   className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white py-8 text-xl md:text-2xl rounded-full shadow-xl disabled:opacity-50 font-bold hover:scale-105 transition-transform"
                 >
-                  {isSpinning ? "🎡 Girando a roleta..." : "Gire agora e descubra seu presente ➜"}
+                  {isSpinning ? " રૂ Girando a roleta..." : "Gire agora e descubra seu presente ➜"}
                 </Button>
 
                 <p className="text-center text-sm font-bold text-red-600 bg-red-50 p-3 rounded-lg">
@@ -1585,14 +1596,14 @@ export default function QuizFunnel() {
                   onClick={() => setStep(step + 1)}
                   className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-base md:text-lg rounded-full font-bold shadow-lg hover:scale-105 transition-transform"
                 >
-                  <span className="line-clamp-2">✅ Sim, quero receber agora!</span>
+                  ✅ Sim, quero receber agora!
                 </Button>
                 <Button
                   onClick={() => setStep(step + 1)}
                   variant="outline"
                   className="w-full border-2 border-red-500 text-red-600 hover:bg-red-50 py-6 text-base md:text-lg rounded-full font-bold"
                 >
-                  <span className="line-clamp-2">❌ Não, quero perder meus bônus</span>
+                  ❌ Não, quero perder meus bônus
                 </Button>
               </div>
             </div>
@@ -1849,7 +1860,7 @@ export default function QuizFunnel() {
             </div>
 
             <Button
-              onClick={() => alert("Redirecionando para checkout...")}
+              onClick={() => (window.location.href = "https://pay.cakto.com.br/32fbed9_600746")}
               className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-lg rounded-full shadow-lg font-bold"
             >
               QUERO HOJE AGORA! →
@@ -2039,7 +2050,7 @@ export default function QuizFunnel() {
             </div>
 
             <Button
-              onClick={() => alert("Redirecionando para checkout...")}
+              onClick={() => (window.location.href = "https://pay.cakto.com.br/32fbed9_600746")}
               className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-lg rounded-full shadow-lg font-bold"
             >
               QUERO HOJE AGORA! →
