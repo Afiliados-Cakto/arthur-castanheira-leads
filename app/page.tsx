@@ -1404,27 +1404,25 @@ export default function QuizFunnel() {
               </div>
             </Card>
 
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-gray-900 text-center">🎁 Bônus disponíveis na roleta:</h3>
-              <div className="grid md:grid-cols-2 gap-3">
-                {prizes.map((prize) => (
-                  <div
-                    key={prize.id}
-                    className={`flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm border-2 ${prize.id === 2 ? "border-amber-300 bg-amber-50" : "border-gray-100"}`}
-                  >
-                    <span className="text-2xl">{prize.emoji}</span>
-                    <div>
-                      <p className="font-bold text-gray-900 text-sm">{prize.name}</p>
-                      <p className="text-xs text-gray-600">{prize.subtitle}</p>
-                    </div>
-                    {prize.id === 2 && (
-                      <span className="ml-auto text-xs bg-amber-500 text-white px-2 py-1 rounded-full font-bold">
-                        RARO
-                      </span>
-                    )}
+            <h3 className="text-xl font-bold text-gray-900 text-center">🎁 Bônus disponíveis na roleta:</h3>
+            <div className="grid md:grid-cols-2 gap-3">
+              {prizes.map((prize) => (
+                <div
+                  key={prize.id}
+                  className={`flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm border-2 ${prize.id === 2 ? "border-amber-300 bg-amber-50" : "border-gray-100"}`}
+                >
+                  <span className="text-2xl">{prize.emoji}</span>
+                  <div>
+                    <p className="font-bold text-gray-900 text-sm">{prize.name}</p>
+                    <p className="text-xs text-gray-600">{prize.subtitle}</p>
                   </div>
-                ))}
-              </div>
+                  {prize.id === 2 && (
+                    <span className="ml-auto text-xs bg-amber-500 text-white px-2 py-1 rounded-full font-bold">
+                      RARO
+                    </span>
+                  )}
+                </div>
+              ))}
             </div>
 
             <Card className="p-8 space-y-8 bg-gradient-to-br from-white to-green-50 border-2 border-green-200 shadow-2xl">
@@ -1449,6 +1447,25 @@ export default function QuizFunnel() {
                           "conic-gradient(from 0deg, #22c55e 0deg 65deg, #fbbf24 65deg 90deg, #ef4444 90deg 145deg, #3b82f6 145deg 200deg, #8b5cf6 200deg 255deg, #ec4899 255deg 310deg, #10b981 310deg 360deg)",
                       }}
                     ></div>
+
+                    {prizes.map((prize, index) => (
+                      <div
+                        key={prize.id}
+                        className="absolute w-full h-full flex items-center justify-center"
+                        style={{
+                          transform: `rotate(${prize.angle + prize.size / 2}deg)`,
+                        }}
+                      >
+                        <div
+                          className="text-4xl"
+                          style={{
+                            transform: `translateY(-120px) rotate(${-(prize.angle + prize.size / 2)}deg)`,
+                          }}
+                        >
+                          {prize.image}
+                        </div>
+                      </div>
+                    ))}
                   </div>
 
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-gradient-to-br from-green-500 to-green-700 rounded-full shadow-xl flex items-center justify-center border-4 border-white">
