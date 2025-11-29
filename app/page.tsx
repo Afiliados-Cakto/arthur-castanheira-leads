@@ -81,9 +81,8 @@ export default function QuizFunnel() {
     }
   }, [step, revealedBonuses])
 
-  // Effect for loading progress on step 16
   useEffect(() => {
-    if (step === 16 && !isLoading) {
+    if (step === 16) {
       setIsLoading(true)
       setLoadingProgress(0)
       let currentProgress = 0
@@ -92,15 +91,13 @@ export default function QuizFunnel() {
         setLoadingProgress(currentProgress)
         if (currentProgress >= 100) {
           clearInterval(interval)
-          setTimeout(() => {
-            setIsLoading(false)
-            setStep(17)
-          }, 500)
+          setStep(17)
+          setIsLoading(false)
         }
       }, 80)
       return () => clearInterval(interval)
     }
-  }, [step, isLoading])
+  }, [step])
 
   useEffect(() => {
     if (step === 14 && showWinMessage) {
@@ -114,24 +111,7 @@ export default function QuizFunnel() {
   }, [step, showWinMessage])
 
   const handleNext = () => {
-    if (step === 14) {
-      // Página de carregamento
-      setIsLoading(true)
-      let currentProgress = 0
-      const interval = setInterval(() => {
-        currentProgress += 2
-        setLoadingProgress(currentProgress)
-        if (currentProgress >= 100) {
-          clearInterval(interval)
-          setTimeout(() => {
-            setIsLoading(false)
-            setStep(step + 1)
-          }, 500)
-        }
-      }, 60)
-    } else {
-      setStep(step + 1)
-    }
+    setStep(step + 1)
   }
 
   const handleBack = () => {
