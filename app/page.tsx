@@ -1574,16 +1574,16 @@ export default function QuizFunnel() {
               <div className="grid grid-cols-2 gap-4">
                 <Button
                   onClick={() => setStep(step + 1)}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-base md:text-lg rounded-full font-bold shadow-lg hover:scale-105 transition-transform"
+                  className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-sm md:text-base rounded-full font-bold shadow-lg hover:scale-105 transition-transform"
                 >
-                  ✅ Sim, quero receber agora!
+                  ✅ Sim, quero!
                 </Button>
                 <Button
                   onClick={() => setStep(step + 1)}
                   variant="outline"
-                  className="w-full border-2 border-red-500 text-red-600 hover:bg-red-50 py-6 text-base md:text-lg rounded-full font-bold"
+                  className="w-full border-2 border-red-500 text-red-600 hover:bg-red-50 py-6 text-sm md:text-base rounded-full font-bold"
                 >
-                  ❌ Não, quero perder meus bônus
+                  ❌ Não, obrigada
                 </Button>
               </div>
             </div>
