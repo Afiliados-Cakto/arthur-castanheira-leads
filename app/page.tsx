@@ -94,7 +94,7 @@ export default function QuizFunnel() {
           clearInterval(interval)
           setTimeout(() => {
             setIsLoading(false)
-            setStep(step + 1)
+            setStep(17)
           }, 500)
         }
       }, 80)
