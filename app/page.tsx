@@ -1229,7 +1229,7 @@ export default function QuizFunnel() {
     )
   }
 
-  // Step 14 (was 13) - Roleta de Bônus
+  // Página 14: Roleta de Bônus
   if (step === 14) {
     const prizes = [
       {
