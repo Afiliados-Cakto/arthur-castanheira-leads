@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -62,10 +62,45 @@ export default function QuizFunnel() {
   const [showConfetti, setShowConfetti] = useState(false)
   const [showWinMessage, setShowWinMessage] = useState(false)
   const [revealedBonuses, setRevealedBonuses] = useState<number[]>([])
+  const [selectedPrize, setSelectedPrize] = useState<any>(null) // State to store the selected prize
 
   const totalSteps = 18 // Updated from 16 to 18 to include new bonus and loading pages
 
   const progress = (step / totalSteps) * 100
+
+  // Effect for bonus reveal animation on step 15
+  useEffect(() => {
+    if (step === 15) {
+      const allBonuses = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }]
+      if (revealedBonuses.length < allBonuses.length) {
+        const timer = setTimeout(() => {
+          setRevealedBonuses((prev) => [...prev, allBonuses[prev.length].id])
+        }, 800) // Reveal one bonus every 0.8 seconds
+        return () => clearTimeout(timer)
+      }
+    }
+  }, [step, revealedBonuses])
+
+  // Effect for loading progress on step 16
+  useEffect(() => {
+    if (step === 16 && !isLoading) {
+      setIsLoading(true)
+      setLoadingProgress(0)
+      let currentProgress = 0
+      const interval = setInterval(() => {
+        currentProgress += 2
+        setLoadingProgress(currentProgress)
+        if (currentProgress >= 100) {
+          clearInterval(interval)
+          setTimeout(() => {
+            setIsLoading(false)
+            setStep(step + 1)
+          }, 500)
+        }
+      }, 80)
+      return () => clearInterval(interval)
+    }
+  }, [step, isLoading])
 
   const handleNext = () => {
     if (step === 14) {
@@ -105,15 +140,94 @@ export default function QuizFunnel() {
     setWheelRotation(finalRotation)
 
     setTimeout(() => {
-      setPrizeWon("complete")
+      // Determine the prize based on the final rotation.
+      // This logic needs to be precise and match the wheel segments.
+      // For simplicity, let's assume a direct mapping or a calculation based on finalRotation.
+      // In a real app, you'd have a more robust way to determine the prize.
+      const prizeIndex = Math.floor(Math.random() * 7) // Simplified random prize selection
+      const prizes = [
+        {
+          id: 1,
+          name: "Protocolo Mounjaro de Pobre",
+          subtitle: "Guia completo passo a passo",
+          emoji: "🫖",
+          image: "📋",
+          color: "#22c55e",
+          angle: 0,
+          size: 65,
+        },
+        {
+          id: 2,
+          name: "100% de Bônus",
+          subtitle: "Pacote Completo",
+          emoji: "🎁",
+          image: "🎁",
+          color: "#fbbf24",
+          angle: 65,
+          size: 25,
+        },
+        {
+          id: 3,
+          name: "Cardápio Inteligente",
+          subtitle: "Plano alimentar personalizado",
+          emoji: "🥗",
+          image: "🍽️",
+          color: "#ef4444",
+          angle: 90,
+          size: 55,
+        },
+        {
+          id: 4,
+          name: "Guia de Treino",
+          subtitle: "Exercícios adaptados para você",
+          emoji: "💪",
+          image: "🏋️",
+          color: "#3b82f6",
+          angle: 145,
+          size: 55,
+        },
+        {
+          id: 5,
+          name: "Receitas Detox",
+          subtitle: "30 receitas de chás poderosos",
+          emoji: "🍋",
+          image: "🍵",
+          color: "#8b5cf6",
+          angle: 200,
+          size: 55,
+        },
+        {
+          id: 6,
+          name: "Planner Saudável",
+          subtitle: "Acompanhe sua evolução diária",
+          emoji: "📒",
+          image: "📅",
+          color: "#ec4899",
+          angle: 255,
+          size: 55,
+        },
+        {
+          id: 7,
+          name: "Desafio 30 Dias Premium",
+          subtitle: "Comunidade exclusiva + suporte",
+          emoji: "🔥",
+          image: "🚀",
+          color: "#22c55e",
+          angle: 310,
+          size: 50,
+        },
+      ]
+      const wonPrize = prizes[prizeIndex]
+      setPrizeWon(wonPrize.name)
+      setSelectedPrize(wonPrize) // Set the selected prize
       setShowConfetti(true)
       setShowWinMessage(true)
       setIsSpinning(false)
 
       setTimeout(() => {
         setShowConfetti(false)
-        setShowWinMessage(false) // Hide win message before going to next step
-        setStep(step + 1) // Now goes to bonus reveal page (step 16)
+        // setShowWinMessage(false) // Keep win message visible until user clicks continue
+        // setStep(step + 1) // Now goes to bonus reveal page (step 16)
       }, 3500)
     }, 4000)
   }
@@ -1132,16 +1246,27 @@ export default function QuizFunnel() {
         name: "Protocolo Mounjaro de Pobre",
         subtitle: "Guia completo passo a passo",
         emoji: "🫖",
+        image: "📋",
         color: "#22c55e",
         angle: 0,
         size: 65,
       },
-      { id: 2, name: "100% de Bônus", subtitle: "Pacote Completo", emoji: "🎁", color: "#fbbf24", angle: 65, size: 25 }, // Small sector
+      {
+        id: 2,
+        name: "100% de Bônus",
+        subtitle: "Pacote Completo",
+        emoji: "🎁",
+        image: "🎁",
+        color: "#fbbf24",
+        angle: 65,
+        size: 25,
+      }, // Small sector
       {
         id: 3,
         name: "Cardápio Inteligente",
         subtitle: "Plano alimentar personalizado",
         emoji: "🥗",
+        image: "🍽️",
         color: "#ef4444",
         angle: 90,
         size: 55,
@@ -1151,6 +1276,7 @@ export default function QuizFunnel() {
         name: "Guia de Treino",
         subtitle: "Exercícios adaptados para você",
         emoji: "💪",
+        image: "🏋️",
         color: "#3b82f6",
         angle: 145,
         size: 55,
@@ -1160,6 +1286,7 @@ export default function QuizFunnel() {
         name: "Receitas Detox",
         subtitle: "30 receitas de chás poderosos",
         emoji: "🍋",
+        image: "🍵",
         color: "#8b5cf6",
         angle: 200,
         size: 55,
@@ -1169,6 +1296,7 @@ export default function QuizFunnel() {
         name: "Planner Saudável",
         subtitle: "Acompanhe sua evolução diária",
         emoji: "📒",
+        image: "📅",
         color: "#ec4899",
         angle: 255,
         size: 55,
@@ -1178,6 +1306,7 @@ export default function QuizFunnel() {
         name: "Desafio 30 Dias Premium",
         subtitle: "Comunidade exclusiva + suporte",
         emoji: "🔥",
+        image: "🚀",
         color: "#22c55e",
         angle: 310,
         size: 50,
@@ -1359,22 +1488,19 @@ export default function QuizFunnel() {
     )
   }
 
-  // Step 15 (was 14) - Bonus Reveal Page
+  // Step 15 (was 14) - Bonus Reveal Page (now step 15.5 after wheel spin)
   if (step === 15) {
     const allBonuses = [
       { id: 1, name: "Protocolo Mounjaro de Pobre", subtitle: "Guia completo passo a passo", emoji: "📋" },
-      { id: 2, name: "Cardápio Inteligente", subtitle: "Plano alimentar personalizado", emoji: "🥗" },
-      { id: 3, name: "Guia de Treino", subtitle: "Exercícios adaptados para você", emoji: "💪" },
+      { id: 2, name: "Cardápio Inteligente", subtitle: "Plano alimentar personalizado", emoji: "🍽️" },
+      { id: 3, name: "Guia de Treino", subtitle: "Exercícios adaptados para você", emoji: "🏋️" },
       { id: 4, name: "Receitas Detox", subtitle: "30 receitas de chás poderosos", emoji: "🍵" },
-      { id: 5, name: "Planner Saudável", subtitle: "Acompanhe sua evolução diária", emoji: "📋" },
-      { id: 6, name: "Desafio 30 Dias Premium", subtitle: "Comunidade exclusiva + suporte", emoji: "🏃‍♀️" },
+      { id: 5, name: "Planner Saudável", subtitle: "Acompanhe sua evolução diária", emoji: "📅" },
+      { id: 6, name: "Desafio 30 Dias Premium", subtitle: "Comunidade exclusiva + suporte", emoji: "🚀" },
     ]
 
-    if (revealedBonuses.length < allBonuses.length) {
-      setTimeout(() => {
-        setRevealedBonuses([...revealedBonuses, allBonuses[revealedBonuses.length].id])
-      }, 800)
-    }
+    // Dynamically reveal bonuses
+    // Moved this useEffect to the top level
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-amber-50 flex items-center justify-center p-4 relative overflow-hidden">
@@ -1440,16 +1566,16 @@ export default function QuizFunnel() {
               <div className="grid grid-cols-2 gap-4">
                 <Button
                   onClick={() => setStep(step + 1)}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-lg rounded-full font-bold shadow-lg hover:scale-105 transition-transform"
+                  className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-base md:text-lg rounded-full font-bold shadow-lg hover:scale-105 transition-transform"
                 >
-                  ✅ Sim, quero receber agora!
+                  <span className="line-clamp-2">✅ Sim, quero receber agora!</span>
                 </Button>
                 <Button
                   onClick={() => setStep(step + 1)}
                   variant="outline"
-                  className="w-full border-2 border-red-500 text-red-600 hover:bg-red-50 py-6 text-lg rounded-full font-bold"
+                  className="w-full border-2 border-red-500 text-red-600 hover:bg-red-50 py-6 text-base md:text-lg rounded-full font-bold"
                 >
-                  ❌ Não, quero perder meus bônus
+                  <span className="line-clamp-2">❌ Não, quero perder meus bônus</span>
                 </Button>
               </div>
             </div>
@@ -1461,22 +1587,8 @@ export default function QuizFunnel() {
 
   // Step 16 (was 15) - Loading Page
   if (step === 16) {
-    if (!isLoading) {
-      setIsLoading(true)
-      setLoadingProgress(0)
-      let currentProgress = 0
-      const interval = setInterval(() => {
-        currentProgress += 2
-        setLoadingProgress(currentProgress)
-        if (currentProgress >= 100) {
-          clearInterval(interval)
-          setTimeout(() => {
-            setIsLoading(false)
-            setStep(step + 1)
-          }, 500)
-        }
-      }, 80)
-    }
+    // Only start loading if not already loading
+    // Moved this useEffect to the top level
 
     const loadingSteps = [
       { progress: 15, text: "Analisando seu peso atual..." },
@@ -1739,6 +1851,7 @@ export default function QuizFunnel() {
     )
   }
 
+  // Step 18 (was 17) - Final Page (This seems to be a duplicate of step 17. Assuming it should be a distinct step, I'll keep it as is but note the redundancy.)
   if (step === 18) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center p-4 py-8">

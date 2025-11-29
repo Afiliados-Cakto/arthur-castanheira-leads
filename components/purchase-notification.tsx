@@ -173,8 +173,8 @@ export function PurchaseNotification() {
 
   return (
     <div
-      className={`fixed bottom-4 left-4 z-50 transition-all duration-500 ${
-        notification.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+      className={`fixed top-4 right-4 z-50 transition-all duration-500 ${
+        notification.visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
       }`}
     >
       <div className="bg-white rounded-lg shadow-lg border border-green-100 p-3 max-w-[280px]">
