@@ -1675,7 +1675,7 @@ export default function QuizFunnel() {
       <div className="min-h-screen bg-white flex items-center justify-center p-4 py-8">
         <div className="max-w-md w-full space-y-6 animate-fade-in">
           <div className="text-center">
-            <img src="/images/mounjaro-logo.png" alt="Mounjaro Logo" className="h-10 w-auto mx-auto mb-6" />
+            <img src="/images/mounjaro-logo.png" alt="Mounjaro Logo" className="h-20 w-auto mx-auto mb-6" />
           </div>
 
           <div className="text-center space-y-2">
@@ -1835,7 +1835,7 @@ export default function QuizFunnel() {
               <div className="space-y-1">
                 <p className="text-xs text-gray-600">por apenas</p>
                 <p className="text-5xl font-bold text-green-600">R$ 37,25</p>
-                <p className="text-sm text-gray-600">ou 12x de R$ 3,60 sem juros</p>
+                <p className="text-sm text-gray-600">ou em até 9x de R$ 5,00</p>
               </div>
             </div>
 
@@ -1865,7 +1865,7 @@ export default function QuizFunnel() {
       <div className="min-h-screen bg-white flex items-center justify-center p-4 py-8">
         <div className="max-w-md w-full space-y-6 animate-fade-in">
           <div className="text-center">
-            <img src="/images/mounjaro-logo.png" alt="Mounjaro Logo" className="h-10 w-auto mx-auto mb-6" />
+            <img src="/images/mounjaro-logo.png" alt="Mounjaro Logo" className="h-20 w-auto mx-auto mb-6" />
           </div>
 
           <div className="text-center space-y-2">
@@ -2025,7 +2025,7 @@ export default function QuizFunnel() {
               <div className="space-y-1">
                 <p className="text-xs text-gray-600">por apenas</p>
                 <p className="text-5xl font-bold text-green-600">R$ 37,25</p>
-                <p className="text-sm text-gray-600">ou 12x de R$ 3,60 sem juros</p>
+                <p className="text-sm text-gray-600">ou em até 9x de R$ 5,00</p>
               </div>
             </div>
 
