@@ -199,7 +199,7 @@ export default function QuizFunnel() {
         },
         {
           id: 7,
-          name: "Desafio 30 Dias Premium",
+          name: "Desafio 7 Dias Premium",
           subtitle: "Comunidade exclusiva + suporte",
           emoji: "🔥",
           image: "🚀",
@@ -1294,7 +1294,7 @@ export default function QuizFunnel() {
       },
       {
         id: 7,
-        name: "Desafio 30 Dias Premium",
+        name: "Desafio 7 Dias Premium",
         subtitle: "Comunidade exclusiva + suporte",
         emoji: "🔥",
         image: "🚀",
@@ -1504,7 +1504,7 @@ export default function QuizFunnel() {
       { id: 3, name: "Guia de Treino", subtitle: "Exercícios adaptados para você", emoji: "🏋️" },
       { id: 4, name: "Receitas Detox", subtitle: "30 receitas de chás poderosos", emoji: "🍵" },
       { id: 5, name: "Planner Saudável", subtitle: "Acompanhe sua evolução diária", emoji: "📅" },
-      { id: 6, name: "Desafio 30 Dias Premium", subtitle: "Comunidade exclusiva + suporte", emoji: "🚀" },
+      { id: 6, name: "Desafio 7 Dias Premium", subtitle: "Comunidade exclusiva + suporte", emoji: "🚀" },
     ]
 
     // Dynamically reveal bonuses
