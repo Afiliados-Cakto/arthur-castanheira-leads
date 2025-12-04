@@ -42,6 +42,15 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className="font-sans antialiased">
         <Script
+          src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+          strategy="afterInteractive"
+          data-utmify-prevent-xcod-sck
+          data-utmify-prevent-subids
+          async
+          defer
+        />
+
+        <Script
           id="meta-pixel"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
