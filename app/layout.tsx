@@ -73,7 +73,7 @@ export default function RootLayout({
             height="1"
             width="1"
             style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1149615593570338&ev=PageView&noscript=1"
+            src="https://www.facebook.com/tr?id=1292043135584173&ev=PageView&noscript=1"
           />
         </noscript>
         {children}
