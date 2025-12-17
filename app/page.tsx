@@ -1840,7 +1840,7 @@ export default function QuizFunnel() {
             </div>
 
             <Button
-              onClick={() => (window.location.href = "https://pay.cakto.com.br/32fbed9_600746")}
+              onClick={() => (window.location.href = "https://pay.cakto.com.br/32fbed9_600746?affiliate=NSbY9fCY")}
               className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-lg rounded-full shadow-lg font-bold"
             >
               QUERO HOJE AGORA! →
